@@ -1,19 +1,55 @@
 .timeline {
     max-width: 700px;
     margin: 2em auto;
-    padding: 0 1em;
+    padding: 0 1em 0 30px;
     display: flex;
     flex-direction: column-reverse; /* fait partir le bas en premier */
     gap: 1.5em;
     font-family: "Segoe UI", Roboto, sans-serif;
+    position: relative;
+}
+
+/* Ligne de connexion verticale */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
 }
 
 .event {
-    background-color: #f0f4f8;
-    padding: 1em;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.5em;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.event:hover {
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(10px);
+}
+
+/* Point de connexion */
+.event::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: 3px solid var(--bg-body);
+    box-shadow: 0 0 0 2px var(--color-primary);
 }
 
 .event .header {
@@ -25,17 +61,17 @@
 
 .event .header h3 {
     margin: 0;
-    color: #004477;
+    color: var(--color-primary);
     font-size: 1.1em;
 }
 
 .event .header .date {
     font-size: 0.85em;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .event p {
     margin: 0;
-    color: #333;
+    color: var(--text-primary);
     line-height: 1.5;
 }

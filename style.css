@@ -1,3 +1,68 @@
+/* --- CSS Custom Properties (Th\u00e8mes) --- */
+:root {
+  /* Couleurs primaires */
+  --color-primary: #004477;
+  --color-primary-dark: #003366;
+  --color-primary-light: #005599;
+  --color-accent: #0055aa;
+
+  /* Backgrounds */
+  --bg-body: #f2f6fa;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --bg-header: rgba(255, 255, 255, 0.8);
+  --bg-footer: #004477;
+
+  /* Textes */
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-light: #b9b9b9;
+  --text-inverse: white;
+
+  /* Bordures et ombres */
+  --border-color: rgba(0, 68, 119, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 10px;
+}
+
+[data-theme="dark"] {
+  /* Couleurs primaires - mode sombre */
+  --color-primary: #4a9eff;
+  --color-primary-dark: #6bb3ff;
+  --color-primary-light: #2d85e0;
+  --color-accent: #5ca3ff;
+
+  /* Backgrounds - mode sombre */
+  --bg-body: #0a0e27;
+  --bg-card: rgba(20, 30, 60, 0.4);
+  --bg-card-hover: rgba(20, 30, 60, 0.6);
+  --bg-header: rgba(10, 20, 40, 0.8);
+  --bg-footer: #0d1b3a;
+
+  /* Textes - mode sombre */
+  --text-primary: #e0e6f0;
+  --text-secondary: #a8b4c8;
+  --text-light: #e0e0e0;
+  --text-inverse: white;
+
+  /* Bordures et ombres - mode sombre */
+  --border-color: rgba(74, 158, 255, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+  /* Glassmorphism - mode sombre */
+  --glass-bg: rgba(20, 30, 60, 0.3);
+  --glass-border: rgba(74, 158, 255, 0.2);
+  --glass-blur: 16px;
+}
+
 /* --- Style global --- */
 html,
 body {
@@ -8,18 +73,31 @@ body {
 
 body {
     font-family: 'Lato', 'Segoe UI', Roboto, sans-serif;
-    background-color: #f2f6fa;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* --- En-tête --- */
 header {
-    background-color: #ffffff;
-    border-bottom: 2px solid #004477;
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
     padding: 1.2em 0 0.8em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-md);
 }
 
 nav ul {
@@ -33,7 +111,7 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: #004477;
+    color: var(--color-primary);
     font-weight: 600;
     font-size: 1rem;
     padding: 0.4em 0.8em;
@@ -42,12 +120,14 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #e9f3ff;
+    background-color: var(--glass-bg);
+    transform: translateY(-2px);
 }
 
 nav a.active {
-    background-color: #004477;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    box-shadow: var(--shadow-md);
 }
 
 .separator {
@@ -55,7 +135,7 @@ nav a.active {
     height: 2px;
     width: 60%;
     margin: 30px auto;
-    background-color: #444;
+    background: linear-gradient(to right, transparent, var(--color-primary), transparent);
     border-radius: 2px;
 }
 
@@ -63,7 +143,94 @@ nav a.active {
     list-style-type: none;
     padding-left: 0;
     margin: 0;
+}
 
+/* --- Canvas de grille cyber --- */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Toggle Dark/Light Mode --- */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-switch-input {
+    display: none;
+}
+
+.theme-switch-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    height: 30px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-switch-label:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-icon {
+    font-size: 16px;
+    transition: opacity 0.3s ease;
+}
+
+.sun-icon {
+    opacity: 1;
+}
+
+.moon-icon {
+    opacity: 0;
+}
+
+[data-theme="dark"] .sun-icon {
+    opacity: 0;
+}
+
+[data-theme="dark"] .moon-icon {
+    opacity: 1;
+}
+
+/* --- Page Transition Overlay --- */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.page-transition-overlay.active {
+    opacity: 1;
+}
+
+body.transitioning {
+    overflow: hidden;
 }
 
 /* --- Section principale --- */
@@ -76,34 +243,47 @@ main {
 
 /* Photo de profil */
 .img-pp {
+    position: relative;
     width: 250px;
     height: 250px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #004477;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 4px solid var(--color-primary);
+    box-shadow: var(--shadow-lg);
     margin-bottom: 1.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.img-pp:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 68, 119, 0.3);
 }
 
 h2 {
-    color: #003366;
+    color: var(--color-primary-dark);
     font-size: 1.8em;
-    /*
-    text-decoration: underline;
-    text-decoration-color: #003366;
-    */
 }
 
 /* Bloc de présentation */
 .presentation h2 {
-    color: #003366;
+    color: var(--color-primary-dark);
     font-size: 1.8em;
     margin: 0.2em 0;
     letter-spacing: 1px;
 }
 
 .presentation h3 {
-    color: #005599;
+    color: var(--color-primary-light);
     font-weight: 400;
     font-size: 1.1em;
     margin-top: 0.3em;
@@ -111,8 +291,8 @@ h2 {
 
 /* --- Pied de page --- */
 footer {
-    background-color: #004477;
-    color: white;
+    background-color: var(--bg-footer);
+    color: var(--text-inverse);
     text-align: center;
     padding: 1em 0;
     margin-top: auto;
@@ -121,6 +301,85 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+/* --- Classes Utilitaires Glassmorphism --- */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+/* --- Animations au scroll --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.animate-fade-in.animate-in {
+    opacity: 1;
+}
+
+.animate-slide-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-slide-left.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-slide-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-slide-right.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-scale.animate-in {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .dev-banner {
@@ -136,7 +395,47 @@ footer p {
     z-index: 1000;
 }
 
-/* logo */
+/* --- Section Contact --- */
+.contact {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2em;
+    box-shadow: var(--shadow-lg);
+    max-width: 600px;
+    margin: 2em auto;
+}
+
+.contact h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+}
+
+.contact a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.contact a:hover::after {
+    width: 100%;
+}
+
+/* --- Logo Technologies --- */
 .logo-prog {
     margin-top: 1em;
     display: flex;
@@ -149,8 +448,14 @@ footer p {
     width: 30px;
     height: 30px;
     object-fit: contain;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
     cursor: default;
+    filter: grayscale(0.3);
+}
+
+.logo-prog img:hover {
+    transform: scale(1.2) translateY(-5px) rotate(5deg);
+    filter: grayscale(0) drop-shadow(0 4px 8px rgba(0, 68, 119, 0.3));
 }
 
 .logo {
@@ -159,19 +464,70 @@ footer p {
     display: inline-block;
     vertical-align: middle;
     margin-left: 2px;
+    transition: all 0.3s ease;
 }
 
 .project .logo:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
     opacity: 1;
+    animation: morph 0.6s ease;
 }
 
-.project .logo-prog img:hover {
-    transform: scale(1.1);
-    opacity: 1;
+@keyframes morph {
+    0%, 100% {
+        border-radius: 0%;
+    }
+    50% {
+        border-radius: 50%;
+    }
 }
 
 
+
+/* --- Accessibilité & Fallbacks --- */
+
+/* Fallback pour browsers sans backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+    .glass,
+    .glass-card,
+    header,
+    .contact {
+        background: var(--bg-card) !important;
+        opacity: 0.95;
+    }
+}
+
+/* Respect des préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+
+    #particle-canvas {
+        display: none;
+    }
+
+    .img-pp {
+        animation: none;
+    }
+}
+
+/* Focus states pour accessibilité clavier */
+a:focus-visible,
+button:focus-visible,
+.theme-switch-label:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
 
 /* --- Responsive design --- */
 
@@ -179,6 +535,10 @@ footer p {
 @media (max-width: 600px) {
     body {
         font-size: 0.95rem;
+    }
+
+    :root {
+        --glass-blur: 6px;
     }
 
     nav ul {
@@ -215,6 +575,19 @@ footer p {
     .separator {
         width: 80%;
     }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+    }
+
+    .animate-on-scroll {
+        transform: translateY(15px);
+    }
+
+    #particle-canvas {
+        display: none;
+    }
 }
 
 /* Tablettes et écrans moyens */
@@ -231,4 +604,13 @@ footer p {
     .presentation h2 {
         font-size: 1.6em;
     }
+
+    :root {
+        --glass-blur: 8px;
+    }
+}
+
+/* Touch devices */
+.touch-device .project .header:active {
+    transform: scale(0.98);
 }
