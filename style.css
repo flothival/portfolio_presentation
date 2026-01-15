@@ -102,6 +102,11 @@
   --glass-blur: 20px;
 }
 
+/* Logo GitHub - inversion en mode sombre */
+[data-theme="dark"] img[src*="github"] {
+  filter: invert(1);
+}
+
 /* ===== RESET & BASE STYLES ===== */
 *,
 *::before,
