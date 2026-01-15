@@ -5,9 +5,12 @@
     <meta name="google-site-verification" content="hG5tq_ppE9PvNpacY1Y4hzQzEDrip9DjSCbtYZ3Pu1A" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florent LABROUSSE-LHUISSIER – Accueil</title>
+    <meta name="description" content="Portfolio de Florent LABROUSSE-LHUISSIER, étudiant en BUT informatique spécialisé en réseaux et cybersécurité">
+    <title>Florent LABROUSSE-LHUISSIER - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&display=swap" rel="stylesheet">
     <script>
         // Appliquer automatiquement le thème du système
         (function() {
@@ -18,61 +21,354 @@
 </head>
 
 <body>
+    <!-- Canvas de fond pixel art -->
     <canvas id="particle-canvas"></canvas>
-    <div class="page-transition-overlay"></div>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="parcours.html">Parcours</a></li>
-                <li><a href="projets.html">Projets</a></li>
+
+    <!-- Navigation sticky -->
+    <header class="nav-header">
+        <nav class="nav-container">
+            <a href="#hero" class="nav-logo"></a>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">Accueil</a></li>
+                <li><a href="#about" class="nav-link">À propos</a></li>
+                <li><a href="#timeline" class="nav-link">Parcours</a></li>
+                <li><a href="#projects" class="nav-link">Projets</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button class="mobile-menu-toggle" aria-label="Menu mobile">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
+    <!-- Overlay menu mobile -->
+    <div class="mobile-menu-overlay">
+        <button class="mobile-menu-close" aria-label="Fermer menu">&times;</button>
+        <nav class="mobile-nav">
+            <a href="#hero" class="mobile-nav-link">Accueil</a>
+            <a href="#about" class="mobile-nav-link">À propos</a>
+            <a href="#timeline" class="mobile-nav-link">Parcours</a>
+            <a href="#projects" class="mobile-nav-link">Projets</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+    </div>
+
     <main>
-        <img src="img/pp2.jpg" alt="pp Florent" class="img-pp">
-        <div class="presentation">
-            <h2>Florent LABROUSSE-LHUISSIER</h2>
-            <h3>Etudiant en deuxième année de BUT informatique</h3>
-        </div>
-
-        <p>
-            Étudiant en deuxième année de BUT Informatique à l’IUT de Montpellier, je me spécialise dans les domaines
-            des réseaux et de la cybersécurité. Animé par une curiosité intellectuelle et une passion profonde pour les
-            technologies numériques, je m’intéresse à une multitude de thématiques gravitant autour de l’informatique,
-            de l’architecture des systèmes à la sécurité des infrastructures, en passant par le développement logiciel.
-            Ce portfolio a pour vocation de retracer mon parcours académique et de présenter l’ensemble de mes projets,
-            reflétant à la fois mes compétences techniques, mon engagement et ma volonté constante d’apprendre et
-            d’innover.
-        </p>
-
-        <!-- 
-        <div class="dev-banner">
-            Site en développement – certaines sections sont en cours d’amélioration 
-        </div>
-         -->
-
-
-        <br>
-        <hr class="separator">
-        <section class="contact">
-            <h3>Contact</h3>
-
-            <a href="mailto:flabrousselhuissier.um@gmail.com">flabrousselhuissier.um@gmail.com</a><br>
-            <strong></strong>34070 Montpellier <br>
-            <strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/florent-l-l/"
-                target="_blank">florent-l-l</a><br>
-
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-image-wrapper">
+                    <img src="img/pp2.jpg" alt="Florent LABROUSSE-LHUISSIER" class="hero-image">
+                </div>
+                <h1 class="hero-name">
+                    <span class="hero-name-text">Florent</span>
+                    <span class="hero-name-text">LABROUSSE-LHUISSIER</span>
+                </h1>
+                <p class="hero-subtitle" id="typed-text"></p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                    <a href="curriculum vitae.pdf" download class="btn btn-accent" target="_blank">Télécharger CV</a>
+                </div>
+            </div>
         </section>
 
+        <!-- About Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <h2 class="section-title">À propos</h2>
+                <div class="about-content">
+                    <p class="about-text">
+                        Étudiant en deuxième année de BUT Informatique à l'IUT de Montpellier, je me spécialise dans les domaines
+                        des réseaux et de la cybersécurité. Animé par une curiosité intellectuelle et une passion profonde pour les
+                        technologies numériques, je m'intéresse à une multitude de thématiques gravitant autour de l'informatique,
+                        de l'architecture des systèmes à la sécurité des infrastructures, en passant par le développement logiciel.
+                    </p>
+                    <p class="about-text">
+                        Ce portfolio a pour vocation de retracer mon parcours académique et de présenter l'ensemble de mes projets,
+                        reflétant à la fois mes compétences techniques, mon engagement et ma volonté constante d'apprendre et
+                        d'innover.
+                    </p>
+                </div>
 
+                <h2 class="section-title">Outils maitrisé</h2>
 
+                <div class="skills-carousel">
+                    <div class="skills-track">
+                        <div class="skill-item">
+                            <img src="img/logo/logo java.svg" alt="Java">
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo html.png" alt="HTML">
+                            <span>HTML</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo css.svg" alt="CSS">
+                            <span>CSS</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo js.png" alt="JavaScript">
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo php.png" alt="PHP">
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo python.png" alt="Python">
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo c.png" alt="C">
+                            <span>C</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo as.png" alt="Android Studio">
+                            <span>Android Studio</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo bash.png" alt="Bash">
+                            <span>Bash</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo git.png" alt="Git">
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo docker.png" alt="Docker">
+                            <span>Docker</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo vmware.svg" alt="vmware">
+                            <span>vmware</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo mysql.png" alt="mysql">
+                            <span>mysql</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="img/logo/logo oracle.png" alt="oracle">
+                            <span>Oracle database<br>PL/SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="section timeline-section">
+            <div class="container-narrow">
+                <h2 class="section-title">Parcours</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Bachelor Universitaire de Technologie (BUT) Informatique</h3>
+                            <span class="timeline-date">2024 – Aujourd'hui</span>
+                            <p>
+                                IUT de Montpellier, parcours D.A.C.S (Déploiement d'applications communicantes et sécurisées).
+                                Spécialisation en réseaux, cybersécurité et développement.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Baccalauréat – Lycée Jean Mermoz</h3>
+                            <span class="timeline-date">2021 - 2024</span>
+                            <p>Baccalauréat mention bien.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Stage d'observation – PROBY</h3>
+                            <span class="timeline-date">Avril 2020</span>
+                            <p>Découverte du fonctionnement du service informatique de l'entreprise PROBY.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <h2 class="section-title">Projets</h2>
+
+                <div class="projects-grid">
+                    <!-- Projet 1: Nuit de l'Info -->
+                    <div class="project-card" data-project-id="ndi">
+                        <div class="project-header">
+                            <h3>Nuit de l'Info - 2 éditions</h3>
+                            <span class="project-date">2024 & 2025</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag tag-personal">Projet personnel</span>
+                        </div>
+                        <div class="project-tech">
+                            <img src="img/logo/logo html.png" alt="HTML" title="HTML">
+                            <img src="img/logo/logo css.svg" alt="CSS" title="CSS">
+                            <img src="img/logo/logo js.png" alt="JavaScript" title="JavaScript">
+                        </div>
+                        <button class="project-expand-btn">En savoir plus</button>
+                    </div>
+
+                    <!-- Projet 2: Enchères -->
+                    <div class="project-card" data-project-id="encheres">
+                        <div class="project-header">
+                            <h3>Plateforme de vente aux enchères communicantes et sécurisées</h3>
+                            <span class="project-date">En cours</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag tag-academic">Projet académique</span>
+                        </div>
+                        <div class="project-tech">
+                            <img src="img/logo/logo java.svg" alt="Java" title="Java">
+                        </div>
+                        <button class="project-expand-btn">En savoir plus</button>
+                    </div>
+
+                    <!-- Projet 3: MEUH encoding -->
+                    <div class="project-card" data-project-id="meuh">
+                        <div class="project-header">
+                            <h3>meuh encoding</h3>
+                            <span class="project-date">Mars 2025</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag tag-personal">Projet personnel</span>
+                        </div>
+                        <div class="project-tech">
+                            <img src="img/logo/logo java.svg" alt="Java" title="Java">
+                        </div>
+                        <button class="project-expand-btn">En savoir plus</button>
+                    </div>
+
+                    <!-- Projet 4: Pokémon TCG -->
+                    <div class="project-card" data-project-id="pokemon">
+                        <div class="project-header">
+                            <h3>Jeu de cartes Pokémon TCG</h3>
+                            <span class="project-date">Avril 2025</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag tag-academic">Projet académique</span>
+                        </div>
+                        <div class="project-tech">
+                            <img src="img/logo/logo java.svg" alt="Java" title="Java">
+                        </div>
+                        <button class="project-expand-btn">En savoir plus</button>
+                    </div>
+
+                    <!-- Projet 5: Jules César -->
+                    <div class="project-card" data-project-id="cesar">
+                        <div class="project-header">
+                            <h3>Chiffrement Jules César</h3>
+                            <span class="project-date">Octobre 2024</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag tag-personal">Projet personnel</span>
+                        </div>
+                        <div class="project-tech">
+                            <img src="img/logo/logo java.svg" alt="Java" title="Java">
+                        </div>
+                        <button class="project-expand-btn">En savoir plus</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container-narrow">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <div class="contact-item" onclick="openContactModal('email')">
+                            <span class="contact-icon">📧</span>
+                            <span>Email</span>
+                        </div>
+                        <div class="contact-item" onclick="openContactModal('location')">
+                            <span class="contact-icon">📍</span>
+                            <span>Localisation</span>
+                        </div>
+                        <div class="contact-item" onclick="openContactModal('linkedin')">
+                            <img src="img/logo/logo linkedin.png" alt="LinkedIn" class="contact-icon-img">
+                            <span>LinkedIn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Contact Email -->
+        <div class="contact-modal" id="emailModal">
+            <div class="contact-modal-overlay" onclick="closeContactModal('email')"></div>
+            <div class="contact-modal-content">
+                <button class="contact-modal-close" onclick="closeContactModal('email')">&times;</button>
+                <h3>📧 Email</h3>
+                <p class="contact-modal-value">flabrousselhuissier.um@gmail.com</p>
+                <div class="contact-modal-actions">
+                    <a href="mailto:flabrousselhuissier.um@gmail.com" class="btn btn-primary">Envoyer un email</a>
+                    <button class="btn btn-outline" onclick="copyToClipboard('flabrousselhuissier.um@gmail.com', this)">Copier l'adresse</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Contact Localisation -->
+        <div class="contact-modal" id="locationModal">
+            <div class="contact-modal-overlay" onclick="closeContactModal('location')"></div>
+            <div class="contact-modal-content contact-modal-map">
+                <button class="contact-modal-close" onclick="closeContactModal('location')">&times;</button>
+                <h3>📍 Localisation</h3>
+                <p class="contact-modal-value">34070 Montpellier, France</p>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=3.8077%2C43.5777%2C3.9277%2C43.6377&layer=mapnik&marker=43.6077%2C3.8677"
+                        width="100%"
+                        height="300"
+                        style="border:0; border-radius: 12px;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Contact LinkedIn -->
+        <div class="contact-modal" id="linkedinModal">
+            <div class="contact-modal-overlay" onclick="closeContactModal('linkedin')"></div>
+            <div class="contact-modal-content">
+                <button class="contact-modal-close" onclick="closeContactModal('linkedin')">&times;</button>
+                <img src="img/logo/logo linkedin.png" alt="linkedin" class="contact-icone-img">
+                <p class="contact-modal-value">florent-l-l</p>
+                <div class="contact-modal-actions">
+                    <a href="https://www.linkedin.com/in/florent-l-l/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Aller sur LinkedIn</a>
+                    <button class="btn btn-outline" onclick="copyToClipboard('https://www.linkedin.com/in/florent-l-l/', this)">Copier le lien</button>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Florent LABROUSSE-LHUISSIER <br>Tous droits réservés</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Florent LABROUSSE-LHUISSIER - Tous droits réservés</p>
     </footer>
+
+    <!-- Modal pour les projets -->
+    <div class="modal" id="projectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fermer">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenu dynamique -->
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
