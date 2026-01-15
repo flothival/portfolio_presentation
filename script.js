@@ -514,7 +514,7 @@ class ProjectModal {
         date: 'Octobre 2024',
         type: 'Projet personnel',
         content: `
-          <p>Un de mes projets en Java à été de réaliser le chiffrement de Jules Cesar. Ce projet explore l'un des plus anciens principes de la cryptographie, popularisé par Jules César lui-même. Développé en Java, ce programme met en œuvre un algorithme de substitution permettant de chiffrer et déchiffrer un texte en décalant les lettres de l'alphabet selon une clé numérique.</p>
+          <p>Un de mes projets en Java a été de réaliser le chiffrement de Jules César. Ce projet explore l'un des plus anciens principes de la cryptographie, popularisé par Jules César lui-même. Développé en Java, ce programme met en œuvre un algorithme de substitution permettant de chiffrer et déchiffrer un texte en décalant les lettres de l'alphabet selon une clé numérique.</p>
 
           <p>Ce projet m'a permis de consolider mes connaissances en manipulation de chaînes de caractères, en gestion des entrées utilisateur et en logique algorithmique tout en découvrant les bases de la cryptographie. Son approche simple mais rigoureuse illustre parfaitement comment un concept historique peut être transposé dans un contexte informatique moderne et pédagogique.</p>
         `,
